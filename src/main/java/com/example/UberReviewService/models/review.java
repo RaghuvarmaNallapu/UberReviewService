@@ -1,30 +1,49 @@
 package com.example.UberReviewService.models;
 
 import jakarta.persistence.*;
-import org.antlr.v4.runtime.misc.NotNull;
-import org.springframework.boot.autoconfigure.web.WebProperties;
+import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.util.Date;
 
 @Entity
 @Table(name = "bookingreview")
+@Builder
+@NoArgsConstructor
+@Getter
+@Setter
+@AllArgsConstructor
+@EntityListeners(AuditingEntityListener.class)
 public class review {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+   private Long id;
 
     @Column(nullable = false)
-    String content;
+    private String content;
 
     Double rating;
 
     @Column(nullable = false)
-    Date createdAt;
+    @Temporal(TemporalType.TIMESTAMP)
+    @CreatedDate
+    private Date createdAt;
 
     @Column(nullable = false)
-    Date updatedAt;
+    @Temporal(TemporalType.TIMESTAMP)
+    @LastModifiedDate
+    private Date updatedAt;
 
 
-
+    @Override
+    public String toString() {
+        return "review{" +
+                "content='" + content + '\'' +
+                ", rating=" + rating +
+                ", createdAt=" + createdAt +
+                '}';
+    }
 }
