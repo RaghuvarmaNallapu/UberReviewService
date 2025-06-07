@@ -4,18 +4,22 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Table(name = "bookingreview")
 @Builder
 @NoArgsConstructor
 @Getter
 @Setter
 @AllArgsConstructor
+@Table(name = "booking_review")
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Review extends BaseModel{
 
     @Column(nullable = false)
     private String content;
 
-    Double rating;
+    private Double rating;
+
+    @OneToOne
+    private Booking booking;// we have defined a 1:1 relationship between booking and review
 
 
     @Override
