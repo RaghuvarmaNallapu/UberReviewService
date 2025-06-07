@@ -1,7 +1,7 @@
 package com.example.UberReviewService.services;
 
 
-import com.example.UberReviewService.models.review;
+import com.example.UberReviewService.models.Review;
 import com.example.UberReviewService.repositories.ReviewRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Service;
@@ -18,7 +18,7 @@ public class ReviewService implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         System.out.println("************************************");
-        review r = review.builder().content("Nice ride with uber and execellent").rating(4.5).build();
+        Review r = Review.builder().content("Nice ride with uber and execellent").rating(4.5).build();
         System.out.println(r);
         repository.save(r);
     }
