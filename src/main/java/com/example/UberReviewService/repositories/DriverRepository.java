@@ -15,5 +15,7 @@ public interface DriverRepository  extends JpaRepository<Driver, Long> {
             "LEFT JOIN booking b ON b.driver_id = p.id " +
             "GROUP BY p.id, p.name", nativeQuery = true)
     List<Object[]> findPassengerBookingCounts();
+
+
 }
     
