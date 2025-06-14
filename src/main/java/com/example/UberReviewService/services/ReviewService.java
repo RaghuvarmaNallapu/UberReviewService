@@ -34,9 +34,9 @@ public class ReviewService implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         System.out.println("************************************");
-//        Review r = Review.builder().content("Nice ride with uber and execellent").rating(4.5).build();
-//        System.out.println(r);
-//        repository.save(r);
+        Review r = Review.builder().content("Nice ride with uber and execellent").rating(4.5).build();
+        System.out.println(r);
+        repository.save(r);
 
         Optional<Driver> d = driverRepository.findById(101L);
         d.ifPresent(driver -> System.out.println("PassengerName" + driver.getName() + "LicenseNo :  " + driver.getLicenseNumber() + "Bookings : " + driver.getBookings()));
@@ -48,6 +48,17 @@ public class ReviewService implements CommandLineRunner {
         for(Booking booking : b){
             System.out.println("Booking ID: " + booking.getId() + "Driver ID: " + booking.getDriver().getId() + "Status: " + booking.getBookingstatus());
         }
+
+
+        //SUBSELECT EXAMPLE
+        List<Long> driversList = Arrays.asList(101L,102L,103L,104L,105L);
+        List<Driver> Drivers = driverRepository.findDriverByIdsIn(driversList);
+
+        for (Driver driver : Drivers){
+            List<Booking> bookings = driver.getBookings();
+            bookings.forEach(booking -> System.out.println(booking.getBookingstatus()));
+        }
+
     }
 
 }

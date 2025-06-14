@@ -16,6 +16,8 @@ public interface DriverRepository  extends JpaRepository<Driver, Long> {
             "GROUP BY p.id, p.name", nativeQuery = true)
     List<Object[]> findPassengerBookingCounts();
 
+    @Query(value = "select d from Driver d where d.id IN  :driverIds")
+    List<Driver> findDriverByIdsIn(List<Long> driverIds);
 
 }
     
